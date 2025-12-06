@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+<div class="container mt-5">
+
+    <h2 class="mb-4">Checkout</h2>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ service.name }}</h5>
+            <p class="card-text">{{ service.description }}</p>
+
+            <div class="d-flex justify-content-between mb-2">
+                <span>Price</span>
+                <strong>${{ service.price }}</strong>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+                <span>Total</span>
+                <strong>${{ service.price }}</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <h5 class="mb-3">Your Details</h5>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="phone" class="form-control" placeholder="Enter phone number" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="date" name="event_date" class="form-control" required>
+                </div>
+
+                <button class="btn btn-primary w-100">
+                    Confirm Booking
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -7,4 +7,4 @@ def home(request):
     age = 18
     context={"service":services_1,"services":services}
     return render(request,"home.html",context)
-
+#make a proper read me.
