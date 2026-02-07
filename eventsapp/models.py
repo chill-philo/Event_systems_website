@@ -26,7 +26,13 @@ class Service(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()
     price = models.IntegerField()
-
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 class Booking(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
