@@ -1,4 +1,10 @@
-
+# @property
+#     def imageURL(self):
+#         try:
+#             url = self.image.url
+#         except:
+#             url = ''
+#         return url
 #Make sure all models are here.
 '''
 vendor/service provider
@@ -26,14 +32,7 @@ class Service(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()
     price = models.IntegerField()
-    @property
-    def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ''
-        return url
-
+    image = models.ImageField(null=True, blank=True)
 class Booking(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
