@@ -33,9 +33,24 @@ class Service(models.Model):
     description = models.TextField()
     price = models.IntegerField()
     image = models.ImageField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.name
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
+
+
 class Booking(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     booking_date = models.DateTimeField(auto_now_add=True)
     event_date = models.DateField()
     status = models.CharField(max_length=50)
+
+    

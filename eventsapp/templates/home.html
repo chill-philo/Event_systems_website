@@ -58,7 +58,8 @@
     <div class="row mt-4">
       {% for service in services %}
       <div class="col-md-4  mb-4 service">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm" >
+          <img src="{{ service.imageURL }}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{ service.name }}</h5>
             <p class="card-text">{{ service.description }}</p>
@@ -67,6 +68,9 @@
             <a href="#" id="{{service.id}}" class="btn btn-primary">Book Now</a>
           </div>
         </div>
+
+
+       
       </div>
       {% endfor %}
     </div>
