@@ -1,16 +1,4 @@
-# @property
-#     def imageURL(self):
-#         try:
-#             url = self.image.url
-#         except:
-#             url = ''
-#         return url
-#Make sure all models are here.
-'''
-vendor/service provider
-service
-booking
-'''
+from django.contrib.auth.models import User
 from django.db import models
 
 class Client(models.Model):
@@ -19,6 +7,14 @@ class Client(models.Model):
     email = models.EmailField()
     contacts = models.CharField(max_length=50)
 
+
+class VendorProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=150)
+    phone = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.company_name
 
 class Vendor(models.Model):
     name = models.CharField(max_length=150)
