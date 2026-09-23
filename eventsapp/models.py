@@ -28,6 +28,13 @@ class EventType(models.Model):
     def __str__(self):
         return self.name
 
+class ServiceCategory(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
 class Vendor(models.Model):
     name = models.CharField(max_length=150)
     email = models.EmailField()
