@@ -12,6 +12,11 @@ class VendorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=150)
     phone = models.CharField(max_length=20)
+    description = models.TextField(blank=True)
+    location = models.CharField(max_length=200, blank=True)
+    whatsapp = models.CharField(max_length=20, blank=True)
+    instagram = models.URLField(blank=True)
+    website = models.URLField(blank=True)
 
     def __str__(self):
         return self.company_name
