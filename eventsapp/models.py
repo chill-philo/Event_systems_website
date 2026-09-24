@@ -48,6 +48,13 @@ class Vendor(models.Model):
 
 class Service(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    vendor_profile = models.ForeignKey(
+        VendorProfile,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="services"
+    )
     category = models.ForeignKey(
         ServiceCategory,
         on_delete=models.PROTECT,
