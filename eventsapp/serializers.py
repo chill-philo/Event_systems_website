@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Service
+from .models import Service, VendorProfile
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -25,4 +25,22 @@ class ServiceSerializer(serializers.ModelSerializer):
             "vendor_name",
             "category",
             "category_name",
+        ]
+
+
+class VendorProfileSerializer(serializers.ModelSerializer):
+    services = ServiceSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = VendorProfile
+        fields = [
+            "id",
+            "company_name",
+            "phone",
+            "description",
+            "location",
+            "whatsapp",
+            "instagram",
+            "website",
+            "services",
         ]

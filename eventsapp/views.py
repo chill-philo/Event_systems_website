@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Service
-from .serializers import ServiceSerializer
+from .models import Service, VendorProfile
+from .serializers import ServiceSerializer, VendorProfileSerializer
 
 
 def home(request):
@@ -17,5 +17,11 @@ def home(request):
 def service_list(request):
     services = Service.objects.all()
     serializer = ServiceSerializer(services, many=True)
+    return Response(serializer.data)
 
+
+@api_view(["GET"])
+def vendor_list(request):
+    vendors = VendorProfile.objects.all()
+    serializer = VendorProfileSerializer(vendors, many=True)
     return Response(serializer.data)
