@@ -1,3 +1,6 @@
 from django.test import TestCase
 
-# Create your tests here.
+
+class EventsAppTestCase(TestCase):
+    def test_basic_setup(self):
+        self.assertEqual(1, 1)

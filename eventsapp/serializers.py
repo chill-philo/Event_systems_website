@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from .models import Event, Service, VendorProfile
+
+from .models import (
+    Booking,
+    Event,
+    Service,
+    VendorProfile,
+)
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -20,6 +26,7 @@ class EventSerializer(serializers.ModelSerializer):
             "location",
             "created_at",
         ]
+
 
 class ServiceSerializer(serializers.ModelSerializer):
     vendor_name = serializers.CharField(
@@ -62,4 +69,41 @@ class VendorProfileSerializer(serializers.ModelSerializer):
             "instagram",
             "website",
             "services",
+        ]
+
+
+class BookingSerializer(serializers.ModelSerializer):
+    event_name = serializers.CharField(
+        source="event.name",
+        read_only=True
+    )
+    service_name = serializers.CharField(
+        source="service.name",
+        read_only=True
+    )
+    vendor_name = serializers.CharField(
+        source="service.vendor_profile.company_name",
+        read_only=True
+    )
+
+    class Meta:
+        model = Booking
+        fields = [
+            "id",
+            "client",
+            "event",
+            "event_name",
+            "service",
+            "service_name",
+            "vendor_name",
+            "event_date",
+            "notes",
+            "status",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = [
+            "status",
+            "created_at",
+            "updated_at",
         ]
