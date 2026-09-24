@@ -30,6 +30,21 @@ class EventType(models.Model):
     def __str__(self):
         return self.name
 
+class Event(models.Model):
+    name = models.CharField(max_length=200)
+    event_type = models.ForeignKey(
+        EventType,
+        on_delete=models.PROTECT,
+        related_name="events"
+    )
+    description = models.TextField(blank=True)
+    event_date = models.DateField()
+    location = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
 
 class ServiceCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)

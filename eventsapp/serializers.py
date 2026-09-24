@@ -1,6 +1,25 @@
 from rest_framework import serializers
-from .models import Service, VendorProfile
+from .models import Event, Service, VendorProfile
 
+
+class EventSerializer(serializers.ModelSerializer):
+    event_type_name = serializers.CharField(
+        source="event_type.name",
+        read_only=True
+    )
+
+    class Meta:
+        model = Event
+        fields = [
+            "id",
+            "name",
+            "event_type",
+            "event_type_name",
+            "description",
+            "event_date",
+            "location",
+            "created_at",
+        ]
 
 class ServiceSerializer(serializers.ModelSerializer):
     vendor_name = serializers.CharField(
