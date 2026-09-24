@@ -19,6 +19,16 @@ def service_list(request):
     serializer = ServiceSerializer(services, many=True)
     return Response(serializer.data)
 
+@api_view(["GET"])
+def service_detail(request, service_id):
+    try:
+        service = Service.objects.get(id=service_id)
+    except Service.DoesNotExist:
+        return Response({"error": "Service not found"}, status=404)
+
+    serializer = ServiceSerializer(service)
+    return Response(serializer.data)
+
 
 @api_view(["GET"])
 def vendor_list(request):
