@@ -35,3 +35,13 @@ def vendor_list(request):
     vendors = VendorProfile.objects.all()
     serializer = VendorProfileSerializer(vendors, many=True)
     return Response(serializer.data)
+
+@api_view(["GET"])
+def vendor_detail(request, vendor_id):
+    try:
+        vendor = VendorProfile.objects.get(id=vendor_id)
+    except VendorProfile.DoesNotExist:
+        return Response({"error": "Vendor not found"}, status=404)
+
+    serializer = VendorProfileSerializer(vendor)
+    return Response(serializer.data)
