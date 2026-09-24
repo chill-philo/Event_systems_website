@@ -16,8 +16,23 @@ def home(request):
 @api_view(["GET"])
 def service_list(request):
     services = Service.objects.all()
+
+    search = request.GET.get("search")
+    category = request.GET.get("category")
+
+    if search:
+        services = services.filter(
+            name__icontains=search
+        ) | services.filter(
+            description__icontains=search
+        )
+
+    if category:
+        services = services.filter(category__id=category)
+
     serializer = ServiceSerializer(services, many=True)
     return Response(serializer.data)
+
 
 @api_view(["GET"])
 def service_detail(request, service_id):
@@ -35,6 +50,7 @@ def vendor_list(request):
     vendors = VendorProfile.objects.all()
     serializer = VendorProfileSerializer(vendors, many=True)
     return Response(serializer.data)
+
 
 @api_view(["GET"])
 def vendor_detail(request, vendor_id):
